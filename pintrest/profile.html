@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+</head>
+<style>
+    /* Navbar styling */
+    .navbar-custom {
+        background-color: #ffffff;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .navbar-brand {
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+    .search-input {
+        border-radius: 25px;
+        padding: 0.5rem 1.5rem;
+        border: 1px solid #ddd;
+        font-size: 1.5rem;
+    }
+
+    .search-section {
+        position: relative;
+    }
+
+    .search-dropdown {
+        position: absolute;
+        top: 110%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 0.375rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 1050;
+    }
+
+    .recent-search,
+    .popular-items {
+        padding: 20px;
+        font-size: 1.3rem;
+    }
+
+    .custom-card {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .custom-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-right: 15px;
+    }
+
+    .card-text {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    li::marker {
+        content: "";
+    }
+
+    i.fas.fa-comments.fa-lg::before {
+        content: "";
+    }
+
+
+    .glass-effect {
+
+
+        background: rgba(255, 255, 255, 0.49);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(237, 236, 236, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 1px solid rgba(255, 255, 255, 0.667);
+    }
+</style>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top bg-light">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <img src="https://th.bing.com/th/id/OIP.oY262EXI2Nd0slZqkBQ-dAHaHa?rs=1&pid=ImgDetMain" alt="logo"
+                    style="height: 50px; width: 50px;">
+            </div>
+
+            <!-- Toggle button for mobile -->
+            <button data-mdb-collapse-init class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Left Section -->
+
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                    <li>
+                        <a href="index.html" class="btn btn-dark fw-bold fs-5" style="border-radius: 30px;">Home</a>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-light fw-bold fs-5"
+                            style="border-radius: 30px;">Create</button>
+                    </li>
+                </ul>
+
+
+
+                <!-- Center Section (Search Bar) -->
+                <div class="search-section w-50 mx-auto">
+                    <input type="text" class="form-control search-input" placeholder="Search" id="searchBar"
+                        aria-expanded="false" data-bs-toggle="dropdown">
+                    <!-- Dropdown for Search -->
+                    <div class="search-dropdown d-none" id="searchDropdown">
+                        <div class="recent-search">
+                            <strong>Recent Searches</strong>
+                            <div>
+                                <span>Wallpaper</span>
+                                <span>Wallpaper</span>
+                                <span>Wallpaper</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="popular-items">
+                            <h4 class="mt-1 mb-4">Popular on Pinterest</h4>
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                <!-- Card 1 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/3110664/pexels-photo-3110664.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Islamic video" class="card-img">
+                                        <div class="card-text">Wallpaper</div>
+                                    </div>
+                                </div>
+                                <!-- Card 2 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/6138896/pexels-photo-6138896.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Rangoli designs" class="card-img">
+                                        <div class="card-text">Wallpaper</div>
+                                    </div>
+                                </div>
+                                <!-- Card 3 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/6665026/pexels-photo-6665026.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Drawing ideas" class="card-img">
+                                        <div class="card-text">Wallpaper</div>
+                                    </div>
+                                </div>
+                                <!-- Card 4 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/6665026/pexels-photo-6665026.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Drawing ideas" class="card-img">
+                                        <div class="card-text">Wallpaper</div>
+                                    </div>
+                                </div>
+                                <!-- Card 5 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/6665026/pexels-photo-6665026.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Drawing ideas" class="card-img">
+                                        <div class="card-text">Wallpaper</div>
+                                    </div>
+                                </div>
+                                <!-- Card 6 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/6665026/pexels-photo-6665026.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Drawing ideas" class="card-img">
+                                        <div class="card-text">Wallpaper</div>
+                                    </div>
+                                </div>
+                                <!-- Card 7 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/6665026/pexels-photo-6665026.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Drawing ideas" class="card-img">
+                                        <div class="card-text">Wallpaper</div>
+                                    </div>
+                                </div>
+                                <!-- Card 8 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/1408221/pexels-photo-1408221.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Female art" class="card-img">
+                                        <div class="card-text">Wallpaper</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Section -->
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Message Icon -->
+                    <a href="#" class="">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/talk-bubble-icon.png"
+                            alt="Messages" height="35">
+                    </a>
+
+                    <!-- Notifications -->
+                    <div class="dropdown">
+                        <button class="btn btn-light p-0 border-0" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/bell-line-icon.png"
+                                alt="Notifications" height="35">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Updates</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Profile Icon -->
+                    <a href="profile.html" class="">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/persona-icon.png"
+                            alt="Profile" height="35">
+                    </a>
+
+                    <!-- Avatar Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle d-flex align-items-center border-0 shadow-none"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                            style="background-color: transparent;">
+                            <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/woman-user-circle-icon.png"
+                                class="rounded-circle" height="25"
+                                alt="Black and White Portrait of a woman-user-circle-icon" loading="lazy" />
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <div class="   " style="width: 350px;  ; margin-top: 0px;">
+                                <div class="col ">
+                                    <div class="row  ">
+                                        <div class="row bac mx-0 rounded  py-2 mx-0 px-0">
+                                            <div class="col-3  d-flex ">
+                                                <a href="profile.html" class="text-decoration-none text-dark">
+                                                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/woman-user-circle-icon.png"
+                                                        class="mb-3 rounded-circle" alt="" width="60px"
+                                                        height="60px"></a>
+                                            </div>
+                                            <div class="col-7 ">
+                                                <a href="profile.html" class="text-decoration-none text-dark">
+                                                    <h5 class="mb-1">Sania Kousar</h5>
+                                                    <p class="m-0" style="font-size: 12px;">Personal</p>
+                                                    <p class="m-0" style="font-size:12px;">saniayaqub7264@gmail.com</p>
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="mx-0 px-1">
+                                        <p class=" px-2  mt-4" style="font-size: 14px; ">Your accounts</p>
+                                        <a href="" class="butn text-decoration-none text-dark ">
+                                            <h6 class="p-2 ">Add account</h6>
+                                        </a>
+                                        <a href="" class="butn text-decoration-none text-dark">
+                                            <h6 class="p-2  ">Convert to business</h6>
+                                        </a>
+                                        <p class="" style="font-size: 14px;">More options</p>
+                                        <a href="" class=" butn text-decoration-none text-dark ">
+                                            <h6 class="  p-2">Settings</h6>
+                                        </a>
+                                        <a href="" class="butn text-decoration-none text-dark ">
+                                            <h6 class=" p-2 ">Home feed tuner</h6>
+                                        </a>
+                                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const searchBar = document.getElementById('searchBar');
+        const searchDropdown = document.getElementById('searchDropdown');
+
+        // Show dropdown when clicking on search bar
+        searchBar.addEventListener('focus', () => {
+            searchDropdown.classList.remove('d-none');
+        });
+
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!searchBar.contains(e.target) && !searchDropdown.contains(e.target)) {
+                searchDropdown.classList.add('d-none');
+            }
+        });
+    </script>
+
+    <!-- Profile Section -->
+    <div class="container my-5 text-center">
+        <div class="profile-header">
+            <div class="profile-img mx-auto">
+                <span class="display-1">S</span>
+            </div>
+            <h2 class="mt-3">Sania Kousar</h2>
+            <p class="text-muted">sania08</p>
+            <p>1M following</p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+                <button class="btn btn-outline-secondary" style="border-radius: 40px;">Share</button>
+                <button class="btn btn-outline-secondary" style="border-radius: 40px;">Edit Profile</button>
+            </div>
+        </div>
+        <br>
+        <br>
+        <hr class="my-4">
+        <!-- Tabs for Created and Saved -->
+        <ul class="nav nav-pills justify-content-center gap-2">
+            <button class="btn btn-outline-secondary" style="border-radius: 40px;">Create</button>
+            <button class="btn btn-outline-secondary" style="border-radius: 40px;">Share</button>
+        </ul>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Copyright -->
+    <footer>
+        <div class="text-center p-3" style="background-color: rgba(148, 148, 148, 0.2)">
+            © 2020 Copyright:
+            <div class="col">
+                <small>© 2024 Sania Kousar | Privacy Policy</small>
+            </div>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+</body>
+
+</html>

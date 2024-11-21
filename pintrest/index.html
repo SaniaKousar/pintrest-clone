@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest Clone Navbar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <style>
+        /* Navbar styling */
+        .navbar-custom {
+            background-color: #ffffff;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .navbar-brand {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .search-input {
+            border-radius: 25px;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid #ddd;
+            font-size: 1.5rem;
+        }
+
+        .search-section {
+            position: relative;
+        }
+
+        .search-dropdown {
+            position: absolute;
+            top: 110%;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 0.375rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1050;
+        }
+
+        .recent-search,
+        .popular-items {
+            padding: 20px;
+            font-size: 1.3rem;
+        }
+
+        .custom-card {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .custom-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .card-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        li::marker {
+            content: "";
+        }
+
+        i.fas.fa-comments.fa-lg::before {
+            content: "";
+        }
+
+        /* USAGE -> The caption text will be displayed on mouseover.
+Please use a unique caption text for each image ID    
+*/
+
+        .wall_img_1 {
+            width: 100%;
+            height: 600px;
+            margin: 40px auto;
+            transition: all .2s ease-in-out;
+        }
+
+        .wall_img_2 {
+            width: 100%;
+            height: 400px;
+            margin: 20px auto;
+            transition: all .2s ease-in-out;
+        }
+
+        .wall_img_1:hover,
+        .wall_img_2:hover {
+            filter: grayscale(0%)
+        }
+
+        .wall_img_1:before,
+        .wall_img_2:before {
+            content: attr(id);
+            opacity: 0;
+            transition: all .2s ease-in-out;
+            width: 100%;
+            position: absolute;
+            top: 40%;
+            text-align: center;
+            display: block;
+            font-size: 22px;
+            color: #fff;
+            mix-blend-mode: overlay;
+        }
+
+        .wall_img_1:hover::before,
+        .wall_img_2:hover::before {
+            content: attr(id);
+            opacity: 1;
+        }
+
+        .btn-light.dropdown-toggle:hover,
+        .btn-light.dropdown-toggle:focus {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
+        .wall_img_1 .save-btn,
+        .wall_img_2 .save-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            z-index: 10;
+        }
+
+        .wall_img_1:hover .save-btn,
+        .wall_img_2:hover .save-btn {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top bg-light">
+        <div class="container-fluid">
+            <!-- Logo -->
+            <div class="d-flex align-items-center">
+                <img src="https://th.bing.com/th/id/OIP.oY262EXI2Nd0slZqkBQ-dAHaHa?rs=1&pid=ImgDetMain" alt="logo"
+                    style="height: 50px; width: 50px;">
+            </div>
+
+            <!-- Toggle button for mobile -->
+            <button data-mdb-collapse-init class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Navbar Content -->
+            <div class="collapse navbar-collapse" id="navbarContent">
+                <!-- Left Section -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                    <button type="button" class="btn btn-dark fw-bold fs-5" style="border-radius: 30px;">Home</button>
+                    <button type="button" class="btn btn-light fw-bold fs-5"
+                        style="border-radius: 30px;">Create</button>
+                </ul>
+
+                <!-- Center Section (Search Bar) -->
+                <div class="search-section w-50 mx-auto">
+                    <input type="text" class="form-control search-input" placeholder="Search" id="searchBar"
+                        aria-expanded="false" data-bs-toggle="dropdown">
+                    <!-- Dropdown for Search -->
+                    <div class="search-dropdown d-none " id="searchDropdown">
+                        <div class="recent-search">
+                            <strong>Recent Searches</strong>
+                            <div>
+                                <span>Wallpaper</span>
+                                <span>Wallpaper</span>
+                                <span>Wallpaper</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="popular-items">
+                            <h4 class="mt-1 mb-4">Popular on Pinterest</h4>
+                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                <!-- Card 1 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Car" class="card-img">
+                                        <div class="card-text">Car</div>
+                                    </div>
+                                </div>
+                                <!-- Card 2 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/3283451/pexels-photo-3283451.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Cart" class="card-img">
+                                        <div class="card-text">Cart</div>
+                                    </div>
+                                </div>
+                                <!-- Card 3 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/775201/pexels-photo-775201.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Forest" class="card-img">
+                                        <div class="card-text">Forest</div>
+                                    </div>
+                                </div>
+                                <!-- Card 4 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/6665026/pexels-photo-6665026.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Drawing ideas" class="card-img">
+                                        <div class="card-text">Wallpaper</div>
+                                    </div>
+                                </div>
+                                <!-- Card 5 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/1133957/pexels-photo-1133957.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Nature" class="card-img">
+                                        <div class="card-text">Nature</div>
+                                    </div>
+                                </div>
+                                <!-- Card 6 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/4406813/pexels-photo-4406813.jpeg?auto=compress&cs=tinysrgb&w=600"
+                                            alt="Maps" class="card-img">
+                                        <div class="card-text">Maps</div>
+                                    </div>
+                                </div>
+                                <!-- Card 7 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/29463000/pexels-photo-29463000/free-photo-of-open-journal-with-artistic-bookmark-on-autumn-leaves.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                                            alt="Background" class="card-img">
+                                        <div class="card-text">Background</div>
+                                    </div>
+                                </div>
+                                <!-- Card 8 -->
+                                <div class="col">
+                                    <div class="custom-card">
+                                        <img src="https://images.pexels.com/photos/29420712/pexels-photo-29420712/free-photo-of-elegant-chrysanthemum-arrangement-with-candlelight.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
+                                            alt="Autumn Decor" class="card-img">
+                                        <div class="card-text">Autumn Decor</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Section -->
+                <div class="d-flex align-items-center gap-3">
+                    <!-- Message Icon -->
+                    <a href="#" class="">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/talk-bubble-icon.png"
+                            alt="Messages" height="35">
+                    </a>
+
+                    <!-- Notifications -->
+                    <div class="dropdown">
+                        <button class="btn btn-light p-0 border-0" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="https://uxwing.com/wp-content/themes/uxwing/download/communication-chat-call/bell-line-icon.png"
+                                alt="Notifications" height="35">
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Updates</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Profile Icon -->
+                    <a href="profile.html" class="">
+                        <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/persona-icon.png"
+                            alt="Profile" height="35">
+                    </a>
+
+                    <!-- Avatar Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle d-flex align-items-center border-0 shadow-none"
+                            type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                            style="background-color: transparent;">
+                            <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/woman-user-circle-icon.png"
+                                class="rounded-circle" height="25"
+                                alt="Black and White Portrait of a woman-user-circle-icon" loading="lazy" />
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <div class="   " style="width: 350px;  ; margin-top: 0px;">
+                                <div class="col ">
+                                    <div class="row  ">
+                                        <div class="row bac mx-0 rounded  py-2 mx-0 px-0">
+                                            <div class="col-3  d-flex ">
+                                                <a href="profile.html" class="text-decoration-none text-dark">
+                                                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/woman-user-circle-icon.png"
+                                                        class="mb-3 rounded-circle" alt="" width="60px"
+                                                        height="60px"></a>
+                                            </div>
+                                            <div class="col-7 ">
+                                                <a href="profile.html" class="text-decoration-none text-dark">
+                                                    <h5 class="mb-1">Sania Kousar</h5>
+                                                    <p class="m-0" style="font-size: 12px;">Personal</p>
+                                                    <p class="m-0" style="font-size:12px;">saniayaqub7264@gmail.com</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mx-0 px-1">
+                                        <p class=" px-2  mt-4" style="font-size: 14px; ">Your accounts</p>
+                                        <a href="" class="butn text-decoration-none text-dark ">
+                                            <h6 class="p-2 ">Add account</h6>
+                                        </a>
+                                        <a href="" class="butn text-decoration-none text-dark">
+                                            <h6 class="p-2  ">Convert to business</h6>
+                                        </a>
+                                        <p class="" style="font-size: 14px;">More options</p>
+                                        <a href="" class=" butn text-decoration-none text-dark ">
+                                            <h6 class="  p-2">Settings</h6>
+                                        </a>
+                                        <a href="" class="butn text-decoration-none text-dark ">
+                                            <h6 class=" p-2 ">Home feed tuner</h6>
+                                        </a>
+                                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const searchBar = document.getElementById('searchBar');
+        const searchDropdown = document.getElementById('searchDropdown');
+
+        // Show dropdown when clicking on search bar
+        searchBar.addEventListener('focus', () => {
+            searchDropdown.classList.remove('d-none');
+        });
+
+        // Hide dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!searchBar.contains(e.target) && !searchDropdown.contains(e.target)) {
+                searchDropdown.classList.add('d-none');
+            }
+        });
+    </script>
+    <div class="container-fluid position-relative overflow-hidden">
+        <div class="row ">
+            <div class="col-md-8 offset-md-2">
+            </div><!-- /col -->
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="row ">
+                    <div class="col-sm-6">
+                        <div class="lc-block">
+                            <div lc-helper="background" class="wall_img_1 rounded"
+                                style="background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1518965377251-de929fb61f2b?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80');"
+                                id="Nature">
+                                <button class="btn btn-danger save-btn">Save</button>
+                            </div>
+                            <div lc-helper="background" class="wall_img_1 rounded"
+                                style="background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1532932371123-928bc0091ec0?ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=635&amp;q=80');"
+                                id="landscape">
+                                <button class="btn btn-danger save-btn">Save</button>
+                            </div>
+                        </div>
+                        <!-- /lc-block -->
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="lc-block ">
+                            <div lc-helper="background" class="wall_img_2 rounded"
+                                style="background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1564661392417-bb629e9c6519?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1002&amp;q=80');"
+                                id="Nature">
+                                <button class="btn btn-danger save-btn">Save</button>
+                            </div>
+                        </div>
+                        <div class="lc-block ">
+                            <div lc-helper="background" class="wall_img_2 rounded"
+                                style="background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1500703067148-d33a221a8603?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80');"
+                                id="This is my landscape">
+                                <button class="btn btn-danger save-btn">Save</button>
+                            </div>
+                        </div>
+                        <div class="lc-block ">
+                            <div lc-helper="background" class="wall_img_2 rounded"
+                                style="background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1462678522506-09a896e3d33f?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80');"
+                                id="Nature">
+                                <button class="btn btn-danger save-btn">Save</button>
+                            </div>
+                        </div>
+                        <!-- /lc-block -->
+                    </div>
+                </div>
+                <!-- /lc-block -->
+            </div><!-- /col -->
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="lc-block">
+                            <div lc-helper="background" class="wall_img_1 rounded"
+                                style="background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1545221858-0c888a4f9058?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=634&amp;q=80');"
+                                id="Nature">
+                                <button class="btn btn-danger save-btn">Save</button>
+                            </div>
+                        </div>
+                        <div class="lc-block ">
+                            <div lc-helper="background" class="wall_img_1 rounded"
+                                style="background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1569764760476-5e1f2eb09c42?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=675&amp;q=80');"
+                                id="Nature">
+                                <button class="btn btn-danger save-btn">Save</button>
+                            </div>
+                        </div>
+                        <!-- /lc-block -->
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="lc-block ">
+                            <div lc-helper="background" class="wall_img_2 rounded"
+                                style="background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1566380351847-6703d9e86886?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80');"
+                                id="Nature">
+                                <button class="btn btn-danger save-btn">Save</button>
+                            </div>
+                        </div>
+                        <div class="lc-block ">
+                            <div lc-helper="background" class="wall_img_2 rounded"
+                                style="background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1436377991866-f9af228d2b47?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80');"
+                                id="Nature">
+                                <button class="btn btn-danger save-btn">Save</button>
+                            </div>
+                        </div>
+                        <div class="lc-block ">
+                            <div lc-helper="background" class="wall_img_2 rounded"
+                                style="background-size: cover; background-position: center; background-image: url('https://images.unsplash.com/photo-1560390984-5b636c4cb1de?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=792&amp;q=80');"
+                                id="Nature">
+                                <button class="btn btn-danger save-btn">Save</button>
+                            </div>
+                        </div>
+                        <!-- /lc-block -->
+                    </div>
+                </div>
+                <!-- /lc-block -->
+            </div><!-- /col -->
+
+        </div><!-- /col -->
+    </div>
+    <!-- Copyright -->
+    <footer>
+        <div class="text-center p-3" style="background-color: rgba(148, 148, 148, 0.2)">
+            © 2020 Copyright:
+            <div class="col">
+                <small>© 2024 Sania Kousar | Privacy Policy</small>
+            </div>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+</body>
+
+</html>
